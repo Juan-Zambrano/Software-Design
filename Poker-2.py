@@ -1,4 +1,22 @@
+#  File: Poker.py
 
+#  Description:
+
+#  Student's Name: Audrey McNay
+
+#  Student's UT EID: alm5735
+
+#  Partner's Name: Juan Zambrano
+
+#  Partner's UT EID: jez346
+
+#  Course Name: CS 313E 
+
+#  Unique Number: 51335
+
+#  Date Created: 2/4/18
+
+#  Date Last Modified: 2/10/18
 
 import random
 
@@ -145,25 +163,16 @@ class Poker (object):
     if len(max_players) == 1:
           print("Player", str(max_players[0]+1), "wins.")
     else:
-      counter = 0
       while j < len(max_players):
         if points_hand[max_players[j]] == max(points_hand):
           print("Player", str(max_players[j] + 1) + " ties.")
           points_hand[max_players[j]] = 0
           j = 0
-          counter +=1
-          if(counter > len(max_players ) -1):
-            break
-          else:
-            continue
-    
-        elif (len(max_players) == 1):
+        elif len(max_players) == 1:
           print("Player", str(max_players[j]+1) + " ties.")
-          print("shit")
           return
         else:
-          j +=1
-        
+          j += 1
     return
 
 
@@ -261,6 +270,7 @@ class Poker (object):
 
   def is_two_pair (self, hand):
     amount_ranks = []
+    suit_ties = []
     for i in range(len(hand)):
       if hand[i].rank not in amount_ranks:
         amount_ranks.append(hand[i].rank)
@@ -269,15 +279,15 @@ class Poker (object):
     if len(amount_ranks) != 3:
       return 0
     else:
-      ind_pair = 0
-      for i in range(len(hand)):
-        for j in range(i,len(hand)):
-          if(hand[i].rank == hand[j].rank):
-            hand.insert(ind_pair,hand.pop(i))
-          else:
-            hand.insert(ind_pair,hand.pop(j))
-          ind_pair += 1
-      return 3 * 13**5 + hand[0].rank * 13**4 + hand[1].rank * 13**3 + hand[2].rank * 13**2 + hand[3].rank * 13 + hand[4].rank
+	     ind_pair = 0
+    for i in range(len(hand)):
+	    for j in range(i, len(hand)):
+		    if hand[i].rank == hand[j].rank:
+		      hand.insert(ind_pair, hand.pop(i))
+        else:
+          hand.insert(ind_pair, hand.pop(j))
+        ind_pair += 1
+    return 3 * 13**5 + hand[0].rank * 13**4 + hand[1].rank * 13**3 + hand[2].rank * 13**2 + hand[3].rank * 13 + hand[4].rank
  
   def is_one_pair (self, hand):
     amount_ranks = []
@@ -289,13 +299,11 @@ class Poker (object):
     if len(amount_ranks) != 4:
       return 0
     else:
-      for i in range(len(hand)):
-        for j in range(i,len(hand)):
-          if(hand[i].rank == hand[j].rank):
-            hand.insert(0,hand.pop(i))
-          else:
-            hand.insert(1,hand.pop(j))
-
+	  for i in range(len(hand)):
+	    for j in range(i, len(hand)):
+		  if hand[i].rank == hand[j].rank:
+		    hand.insert(0, hand.pop(i))
+			hand.insert(1, hand.pop(j))	
       return 2 * 13**5 + hand[0].rank * 13**4 + hand[1].rank * 13**3 + hand[2].rank * 13**2 + hand[3].rank * 13 + hand[4].rank
  
   def is_high_card (self, hand):
